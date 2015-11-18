@@ -11,6 +11,10 @@ class Hoster < Sinatra::Application
   HOSTERS = %w(Lukasz AntoineQ Joel Steve Krzysztof Alexandra).freeze
 
   get '/' do
+    if params['text'] && params['text'] == 'list'
+      return "List :: #{HOSTERS.join(', ')}"
+    end
+    
     new_hoster = if params['text'] && HOSTERS.include?(params['text'])
       (HOSTERS - [params['text']]).sample
     else
