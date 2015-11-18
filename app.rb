@@ -14,7 +14,7 @@ class Hoster < Sinatra::Application
     if params['text'] && params['text'] == 'list'
       return "List :: #{HOSTERS.join(', ')}"
     end
-    
+
     new_hoster = if params['text'] && HOSTERS.include?(params['text'])
       (HOSTERS - [params['text']]).sample
     else
@@ -32,7 +32,7 @@ class Hoster < Sinatra::Application
     #   ]
     # }.to_json
 
-    if params['text']
+    unless params['text'].strip == ''
       "The new hoster is **#{new_hoster}** and thank you _#{params['text']}_"
     else
       "The new hoster is **#{new_hoster}**"
