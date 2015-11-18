@@ -6,3 +6,6 @@ curl -X POST -d "{ \"text\":\"Joel\" }" --compressed -H 'Content-Type: applicati
 curl -X POST -H 'Content-Type: application/json' http://0.0.0.0:8080/?text=Joel | python -mjson.tool
 curl -X GET -H 'Content-Type: application/json' http://0.0.0.0:8080/list | python -mjson.tool
 ```
+
+
+curl -X POST -H 'Content-Type: application/json' http://peaceful-fjord-3682.herokuapp.com/?text=Joel | python -mjson.tool

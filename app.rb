@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'json'
+# require 'json'
 
 begin
   require 'pry'
@@ -17,24 +17,32 @@ class Hoster < Sinatra::Application
       HOSTERS.sample
     end
 
-    content_type :json
-    {
-      "response_type": "in_channel",
-      "text": "The new hoster is **#{new_hoster}** Thanks #{params['text']}",
-      "attachments": [
-        {
-          "text":"Wuuu"
-        }
-      ]
-    }.to_json
+    # content_type :json
+    # {
+    #   "response_type": "in_channel",
+    #   "text": "The new hoster is **#{new_hoster}** Thanks #{params['text']}",
+    #   "attachments": [
+    #     {
+    #       "text":"Wuuu"
+    #     }
+    #   ]
+    # }.to_json
+
+    if params['text']
+      "The new hoster is **#{new_hoster}** and thank you _#{params['text']}_"
+    else
+      "The new hoster is **#{new_hoster}**"
+    end
   end
 
   get '/list' do
-    content_type :json
-    {
-      "response_type": "in_channel",
-      "text": "List :: #{HOSTERS.join(', ')}",
-    }.to_json
+    # content_type :json
+    # {
+    #   "response_type": "in_channel",
+    #   "text": "List :: #{HOSTERS.join(', ')}",
+    # }.to_json
+
+    "List :: #{HOSTERS.join(', ')}"
   end
 
 end
