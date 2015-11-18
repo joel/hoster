@@ -10,7 +10,7 @@ class Hoster < Sinatra::Application
 
   HOSTERS = %w(Lukasz AntoineQ Joel Steve Krzysztof Alexandra).freeze
 
-  post '/' do
+  get '/' do
     new_hoster = if params['text'] && HOSTERS.include?(params['text'])
       (HOSTERS - [params['text']]).sample
     else
