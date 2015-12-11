@@ -1,11 +1,9 @@
-# hoster
+# Hoster
 
-```
-curl -X GET --compressed -H 'Content-Type: application/json' http://0.0.0.0:8080 | python -mjson.tool
-curl -X POST -d "{ \"text\":\"Joel\" }" --compressed -H 'Content-Type: application/json' http://0.0.0.0:8080 | python -mjson.tool
-curl -X POST -H 'Content-Type: application/json' http://0.0.0.0:8080/?text=Joel | python -mjson.tool
-curl -X GET -H 'Content-Type: application/json' http://0.0.0.0:8080/list | python -mjson.tool
-```
+Simple Sinatra app to respond to a Slack command, basically a Slackbot.
 
+### Purpose
 
-curl -X POST -H 'Content-Type: application/json' http://peaceful-fjord-3682.herokuapp.com/?text=Joel | python -mjson.tool
+Just to define who have to host the next weekly meeting.
+
+You can hit the command on whatever channel you have `/who_runs_meeting`
