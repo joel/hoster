@@ -17,7 +17,9 @@ class HostApp < Sinatra::Application
   post '/' do
     content_type :json
 
-    text = params['text']
+    # return if params[:token] != ENV['SLACK_TOKEN']
+
+    text = params[:text]
     text ||= Naught.build { |config| config.black_hole }.new
 
     if text == 'list'
