@@ -11,6 +11,7 @@ begin
 rescue LoadError
 end
 
+require_relative 'core_ext/object'
 require_relative 'lib/host'
 
 begin
@@ -24,7 +25,11 @@ class HostApp < Sinatra::Application
     # return if params[:token] != ENV['SLACK_TOKEN']
 
     text = params[:text]
-    text ||= Naught.build { |config| config.black_hole }.new
+    text = nil if params[:text] && params[:text].strip.blank?
+    text ||= Naught.build do |config|
+      config.black_hole
+      config.predicates_return false
+    end.new
 
     msg = if text == 'list'
       Host.new.list
