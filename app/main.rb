@@ -21,7 +21,7 @@ end
 
 class HostApp < Sinatra::Application
 
-  post '/' do
+  get '/' do
     # return if params[:token] != ENV['SLACK_TOKEN']
 
     text = params[:text]
