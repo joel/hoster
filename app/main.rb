@@ -3,6 +3,7 @@ require 'bundler/setup'
 
 require 'sinatra'
 require 'json'
+require 'naught'
 
 require_relative 'lib/host'
 
@@ -16,12 +17,13 @@ class HostApp < Sinatra::Application
   post '/' do
     content_type :json
 
-    params['text'] ||= ''
+    text = params['text']
+    text ||= Naught.build { |config| config.black_hole }.new
 
-    if params['text'] == 'list'
+    if text == 'list'
       return { text: Host.new.list }.to_json
     end
 
-    { text: Host.new.new_host(params['text']) }.to_json
+    { text: Host.new.new_host(text) }.to_json
   end
 end
