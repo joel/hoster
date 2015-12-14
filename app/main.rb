@@ -24,20 +24,14 @@ class HostApp < Sinatra::Application
   get '/' do
     # return if params[:token] != ENV['SLACK_TOKEN']
 
-    text = params[:text]
-    text = nil if params[:text] && params[:text].strip.blank?
-    text ||= Naught.build do |config|
-      config.black_hole
-      config.predicates_return false
-    end.new
-
-    msg = if text == 'list'
+    msg = if params[:text] == 'list'
       Host.new.list
     else
-      Host.new.new_host(text)
+      Host.new.new_host(params[:text])
     end
 
     poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
+    poster.channel = "##{params[:channel_name]}"
     poster.send_message(msg)
 
     status 200
