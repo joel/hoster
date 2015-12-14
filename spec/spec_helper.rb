@@ -19,14 +19,7 @@ RSpec.configure do |config|
   config.before { }
   config.after  { }
 end
-#
-# def app
-#    Rack::Builder.new{
-#       run HostApp
-#     }.to_app
-# end
 
 def app
-  # Sinatra::Application
   HostApp
 end
