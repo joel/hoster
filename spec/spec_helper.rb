@@ -9,6 +9,13 @@ end
 require 'rack'
 require 'rspec'
 require 'rack/test'
+require 'webmock/rspec'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'vcr_cassettes'
+  config.hook_into :webmock # or :fakeweb
+end
 
 require_relative '../app/main'
 

@@ -2,8 +2,14 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'sinatra'
-require 'json'
 require 'naught'
+require 'slack_poster'
+
+begin
+  require 'dotenv'
+  Dotenv.load
+rescue LoadError
+end
 
 require_relative 'lib/host'
 
@@ -15,17 +21,21 @@ end
 class HostApp < Sinatra::Application
 
   post '/' do
-    content_type :json
-
     # return if params[:token] != ENV['SLACK_TOKEN']
 
     text = params[:text]
     text ||= Naught.build { |config| config.black_hole }.new
 
-    if text == 'list'
-      return { text: Host.new.list }.to_json
+    msg = if text == 'list'
+      Host.new.list
+    else
+      Host.new.new_host(text)
     end
 
-    { text: Host.new.new_host(text) }.to_json
+    poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
+    poster.send_message(msg)
+
+    status 200
+    'ok'
   end
 end
