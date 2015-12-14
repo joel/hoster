@@ -12,8 +12,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'webmock'
-  gem 'vcr'
   gem 'rack-test'
   gem 'rspec', require: 'spec'
 end

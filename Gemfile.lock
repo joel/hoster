@@ -1,13 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.4.0)
     coderay (1.1.0)
-    crack (0.4.3)
-      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     dotenv (2.0.2)
-    hashdiff (0.2.3)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -39,7 +35,6 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    safe_yaml (1.0.4)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -52,11 +47,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    vcr (3.0.0)
-    webmock (1.22.3)
-      addressable (>= 2.3.6)
-      crack (>= 0.3.2)
-      hashdiff
 
 PLATFORMS
   ruby
@@ -70,8 +60,6 @@ DEPENDENCIES
   sinatra
   slack-poster
   unicorn
-  vcr
-  webmock
 
 BUNDLED WITH
    1.10.6
