@@ -4,6 +4,8 @@ require 'bundler/setup'
 require 'sinatra'
 require 'naught'
 require 'slack_poster'
+require 'time_constants'
+require 'redis'
 
 begin
   require 'dotenv'

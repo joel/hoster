@@ -1,5 +1,3 @@
-require 'time_constants'
-
 class RedisProxy
 
   def initialize(dry=false)
