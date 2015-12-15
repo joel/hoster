@@ -50,7 +50,8 @@ class HostApp < Sinatra::Application
       end
 
       poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
-      poster.channel = "##{params[:channel_name]}"
+      poster.channel = params[:channel_name] ? "##{params[:channel_name]}" : '#team_tech_backend'
+      public_message ||= 'No message...'
       poster.send_message(public_message)
 
     rescue ArgumentError => e
