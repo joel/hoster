@@ -46,13 +46,13 @@ class HostApp < Sinatra::Application
       when :get
         msg = "**#{redis_proxy.get}** will host the next meeting"
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", msg]
-      else
       end
 
-      poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
-      poster.channel = params[:channel_name] ? "##{params[:channel_name]}" : '#team_tech_backend'
-      public_message ||= 'No message...'
-      poster.send_message(public_message)
+      if public_message
+        poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
+        poster.channel = params[:channel_name] ? "##{params[:channel_name]}" : '#team_tech_backend'
+        poster.send_message(public_message)
+      end
 
     rescue ArgumentError => e
       private_message = "#{e.message}\n"

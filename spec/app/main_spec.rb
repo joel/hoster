@@ -23,28 +23,24 @@ describe HostApp, type: :controller do
   end
 
   describe 'action ::list::' do
-    include_context 'should have public message', nil
     subject { get '/?text=list' }
     it_behaves_like 'success'
     it_behaves_like 'should have private message', 'List :: Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve'
   end
 
   describe 'action ::help::' do
-    include_context 'should have public message', nil
     subject { get '/?text=help' }
     it_behaves_like 'success'
     it_behaves_like 'should have private message', "HELP:\n/meeting help\n/meeting get dry\n/meeting list\n/meeting reset\n/meeting left\n"
   end
 
   describe 'action ::left::' do
-    include_context 'should have public message', nil
     subject { get '/?text=left' }
     it_behaves_like 'success'
     it_behaves_like 'should have private message', "Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve"
   end
 
   describe 'action ::reset::' do
-    include_context 'should have public message', nil
     subject { get '/?text=reset' }
     it_behaves_like 'success'
     it_behaves_like 'should have private message', "RESET, white list was cleaned!"
