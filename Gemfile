@@ -4,7 +4,15 @@ ruby '2.2.3'
 gem 'sinatra'
 gem 'unicorn'
 gem 'naught'
+
+# Slack
 gem 'slack-poster'
+
+# Storage
+gem 'redis'
+
+# Optimization
+gem 'time_constants'
 
 group :development, :test do
   gem 'dotenv'
@@ -12,6 +20,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'mock_redis'
   gem 'rack-test'
   gem 'rspec', require: 'spec'
 end

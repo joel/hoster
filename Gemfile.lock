@@ -10,6 +10,7 @@ GEM
     json (1.8.3)
     kgio (2.10.0)
     method_source (0.8.2)
+    mock_redis (0.15.4)
     multi_xml (0.5.5)
     naught (1.1.0)
     pry (0.10.3)
@@ -22,6 +23,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     raindrops (0.15.0)
+    redis (3.2.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -43,6 +45,7 @@ GEM
       httparty (~> 0.13.7)
     slop (3.6.0)
     tilt (2.0.1)
+    time_constants (0.2)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -53,12 +56,15 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  mock_redis
   naught
   pry
   rack-test
+  redis
   rspec
   sinatra
   slack-poster
+  time_constants
   unicorn
 
 BUNDLED WITH

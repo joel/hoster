@@ -1,3 +1,5 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'rubygems'
 require 'bundler/setup'
 
@@ -9,6 +11,8 @@ end
 require 'rack'
 require 'rspec'
 require 'rack/test'
+
+require 'mock_redis'
 
 require_relative '../app/main'
 
