@@ -38,7 +38,9 @@ HELP:
 ### List
 
 `/meeting list`
+
 `No public message`
+
 **Private Message:** `List :: Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve`
 
 ### Get
