@@ -14,26 +14,44 @@ Simple Sinatra app to respond to a Slack command, basically a Slackbot.
 
 Just to define who have to host the next weekly meeting.
 
-You can hit the command on whatever channel you have `/who_runs_meeting`
+You can hit the command `/meeting` on whatever channel
 
-you can hit the command with key word like
+you can hit the command with key words like `help get list reset left`
 
-`/who_runs_meeting list`
+`/meeting help`
+`No public message`
+**Private Message:**
 ```
-slackbot List :: Lukasz, AntoineQ, Joel, Steve, Krzysztof, Alexandra
-Only you can see this message
+HELP:
+/meeting help
+/meeting get dry
+/meeting list
+/meeting reset
+/meeting left
 ```
 
-You can remove you from the list
-`/who_runs_meeting Joel`
-```
-slackbot The new hoster is **AntoineQ** and thank you ​_Joel_​
-Only you can see this message
-```
+`/meeting list`
+`No public message`
+**Private Message:** `List :: Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve`
 
-Or just lunch the command
-```
-`/who_runs_meeting`
-slackbot The new hoster is **Alexandra**
-Only you can see this message
-```
+You can ask who host the next meeting
+`/meeting get`
+**Public Message:** `**Alexandra** will host the next meeting`
+**Private Message:** `Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+
+when you hit `get` command the new host will be push on blacklist for 3 weeks and he/she can't host meeting during this period of time. so if you want to play without incidence you can add argument `dry`
+
+You can ask who host the next meeting
+`/meeting get dry`
+**Public Message:** `**Alexandra** will host the next meeting`
+**Private Message:** `Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+
+You can ask who can be chosen for the next meeting, this mean people available on the random choose.
+`/meeting left`
+`No public message`
+**Private Message:** `Leftovers => Joel, Krzysztof, Lukasz`
+
+In case you can reset the blacklist
+`/meeting reset`
+`No public message`
+**Private Message:** `RESET, white list was cleaned!`
