@@ -1,3 +1,5 @@
+require_relative 'date_helper'
+
 class RedisProxy
 
   def get(dry)
@@ -29,6 +31,16 @@ class RedisProxy
     setup { list - black_list }
   end
 
+  def black_list_with_time
+    setup do
+      [].tap do |_black_list|
+        black_list.each do |host_name|
+          _black_list << [host_name, DateHelper.new.distance_of_time_in_words(redis.ttl(key(host_name)))]
+        end
+      end
+    end
+  end
+
   private
 
   def random_host
@@ -43,10 +55,15 @@ class RedisProxy
     redis.keys.map { |key| redis.get(key) if key.match(/BLACK_LIST_KEY/) }.compact
   end
 
+  def key(name)
+    @key ||= {}
+    @key[name] ||= "#{BLACK_LIST_KEY}#{name}"
+    @key[name]
+  end
+
   def add_to_black_list(host,time=T_3_WEEKS)
-    key = "#{BLACK_LIST_KEY}#{host}"
-    redis.set(key, host)
-    redis.expire(key, time)
+    redis.set(key(host), host)
+    redis.expire(key(host), time)
     host
   end
 

@@ -37,6 +37,16 @@ class HostApp < Sinatra::Application
       private_message, public_message = case action.to_sym
       when :list
         ["List :: #{redis_proxy.list.sort.join(', ')}", nil]
+      when :blacklist
+        if redis_proxy.black_list_with_time.empty?
+          ['Nobody was blacklisted', nil]
+        else
+          msg = "Leftovers:\n"
+          redis_proxy.black_list_with_time.each do |host_name, time|
+            msg << "#{host_name} => #{time}\n"
+          end
+          [msg, nil]
+        end
       when :help
         [help_message, nil]
       when :reset
@@ -90,8 +100,9 @@ class HostApp < Sinatra::Application
     msg << "/meeting reset\n"
     msg << "/meeting left\n"
     msg << "/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n"
+    msg << "/meeting blacklist\n"
     msg
   end
 
-  ACTIONS = %w(help get list reset left add).freeze
+  ACTIONS = %w(help get list reset left add blacklist).freeze
 end

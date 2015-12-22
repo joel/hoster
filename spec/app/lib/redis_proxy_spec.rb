@@ -74,6 +74,19 @@ describe RedisProxy do
     end
   end
 
+  describe '#black_list_with_time' do
+    context 'with a name pushed on the blacklist' do
+      before do
+        instance.send(:add_to_black_list, 'Joel')
+        expect(instance.send(:black_list)).to eql(['Joel'])
+        expect_any_instance_of(MockRedis).to receive(:ttl).with('HOST::BLACK_LIST_KEY::Joel') { 1814352 }
+      end
+      it 'should give the name blacklisted with left time' do
+        expect(instance.black_list_with_time).to eql([['Joel', '20 days, 23 hours, 59 minutes and 12 seconds']])
+      end
+    end
+  end
+
   describe '#white_list' do
     context 'without black_list' do
       it 'should give the entirely list' do

@@ -19,7 +19,7 @@ describe HostApp, type: :controller do
   describe 'bad arguments' do
     subject { get '/?text=unknow' }
     it_behaves_like 'success'
-    it_behaves_like 'should have private message', "unknow action => 'unknow'\n\nHELP:\n/meeting help\n/meeting get dry\n/meeting list\n/meeting reset\n/meeting left\n/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n"
+    it_behaves_like 'should have private message', "unknow action => 'unknow'\n\nHELP:\n/meeting help\n/meeting get dry\n/meeting list\n/meeting reset\n/meeting left\n/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n/meeting blacklist\n"
   end
 
   describe 'action ::list::' do
@@ -31,7 +31,7 @@ describe HostApp, type: :controller do
   describe 'action ::help::' do
     subject { get '/?text=help' }
     it_behaves_like 'success'
-    it_behaves_like 'should have private message', "HELP:\n/meeting help\n/meeting get dry\n/meeting list\n/meeting reset\n/meeting left\n/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n"
+    it_behaves_like 'should have private message', "HELP:\n/meeting help\n/meeting get dry\n/meeting list\n/meeting reset\n/meeting left\n/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n/meeting blacklist\n"
   end
 
   describe 'action ::left::' do

@@ -34,6 +34,7 @@ HELP:
 /meeting reset
 /meeting left
 /meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>
+/meeting blacklist
 ```
 
 ### List
@@ -97,3 +98,18 @@ Time could be :
 `No public message`
 
 **Private Message:** `**<host name for blacklist>** was put in blacklist, Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+
+### Blacklist
+
+`/meeting blacklist`
+
+`No public message`
+
+**Private Message:**
+
+```
+Leftovers:
+Alexandra => 20 days, 23 hours, 58 minutes and 13 seconds (time left to remove it from Blacklist)
+```
+
+or `Nobody was blacklisted`
