@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe RedisProxy do
-  let(:dry) { true }
-  let(:instance) { described_class.new(dry) }
+  let(:instance) { described_class.new }
 
   describe '#list' do
     it 'should give the entirely list' do
@@ -10,9 +9,27 @@ describe RedisProxy do
     end
   end
 
+  describe '#add' do
+    it 'blacklist person added' do
+      expect { instance.add('AntoineQ') }.to change {
+        instance.white_list
+      }.from(
+        ['Alexandra', 'AntoineQ', 'Joel', 'Krzysztof', 'Lukasz', 'Steve']
+      ).to(
+        ['Alexandra', 'Joel', 'Krzysztof', 'Lukasz', 'Steve']
+      )
+    end
+    it 'do nothing if person is not on the list' do
+      expect { instance.add('John Doe') }.to_not change { instance.white_list }
+    end
+    it 'add with custom time' do
+      expect_any_instance_of(MockRedis).to receive(:expire).with('HOST::BLACK_LIST_KEY::Steve', T_2_WEEKS)
+      instance.add('Steve', T_2_WEEKS)
+    end
+  end
+
   describe '#get' do
     shared_context 'fake list of names' do
-      let(:instance) { described_class.new(dry) }
       before { expect(instance).to receive(:list) { double(sample: 'Joel') } }
     end
 
@@ -20,7 +37,7 @@ describe RedisProxy do
       let(:dry) { true }
       include_context 'fake list of names'
       it 'shouldn\'t push the name on the blacklist' do
-        expect(instance.get).to eql('Joel')
+        expect(instance.get(dry)).to eql('Joel')
         expect(instance.send(:black_list)).to be_empty
       end
     end
@@ -29,7 +46,7 @@ describe RedisProxy do
       let(:dry) { false }
       include_context 'fake list of names'
       it 'should push the name on the blacklist' do
-        expect(instance.get).to eql('Joel')
+        expect(instance.get(dry)).to eql('Joel')
         expect(instance.send(:black_list)).to eql(['Joel'])
       end
     end

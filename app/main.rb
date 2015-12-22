@@ -30,9 +30,9 @@ class HostApp < Sinatra::Application
     params[:text] ||= ''
 
     begin
-      action, option = get_command(params[:text])
+      action, options = get_command(params[:text])
 
-      redis_proxy = RedisProxy.new(option == 'dry')
+      redis_proxy = RedisProxy.new
 
       private_message, public_message = case action.to_sym
       when :list
@@ -40,12 +40,20 @@ class HostApp < Sinatra::Application
       when :help
         [help_message, nil]
       when :reset
+        redis_proxy.reset
         ['RESET, white list was cleaned!', nil]
       when :left
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", nil]
       when :get
-        msg = "**#{redis_proxy.get}** will host the next meeting"
+        dry = options.first
+        msg = "**#{redis_proxy.get(dry)}** will host the next meeting"
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", msg]
+      when :add
+        name, time = options
+        time = time.to_i if time.present?
+
+        redis_proxy.add(name, time)
+        ["**#{name}** was put in blacklist, Leftovers => #{redis_proxy.white_list.sort.join(', ')}", nil]
       end
 
       if public_message
@@ -68,12 +76,10 @@ class HostApp < Sinatra::Application
 
   def get_command(input)
     commands = input.split
-    unless commands.size >= 1 or commands.size <= 2
-      raise ArgumentError.new('wrong number of argument')
-    end
-    action, option = commands
+    action = commands.shift
+    options = Array(commands)
     raise ArgumentError.new("unknow action => '#{action}'") unless ACTIONS.include?(action)
-    [action, option]
+    [action, options]
   end
 
   def help_message
@@ -83,8 +89,9 @@ class HostApp < Sinatra::Application
     msg << "/meeting list\n"
     msg << "/meeting reset\n"
     msg << "/meeting left\n"
+    msg << "/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n"
     msg
   end
 
-  ACTIONS = %w(help get list reset left).freeze
+  ACTIONS = %w(help get list reset left add).freeze
 end

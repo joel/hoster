@@ -1,15 +1,19 @@
 class RedisProxy
 
-  def initialize(dry=false)
-    @dry = dry
-  end
-
-  def get
+  def get(dry)
     setup do
       host = random_host
       add_to_black_list(host) unless dry
       host
     end
+  end
+
+  def add(name, time=T_3_WEEKS) # T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400
+    _time = time
+    _time ||= T_3_WEEKS
+
+    return unless list.include?(name)
+    add_to_black_list(name, _time)
   end
 
   def list
@@ -31,8 +35,6 @@ class RedisProxy
     list.sample
   end
 
-  attr_accessor :dry
-
   HOSTS_LIST_KEY = 'HOST::LIST_KEY'.freeze
   BLACK_LIST_KEY = 'HOST::BLACK_LIST_KEY::'.freeze
   HOST_NAMES = %w(Alexandra AntoineQ Joel Krzysztof Lukasz Steve).sort.freeze
@@ -41,16 +43,15 @@ class RedisProxy
     redis.keys.map { |key| redis.get(key) if key.match(/BLACK_LIST_KEY/) }.compact
   end
 
-  def add_to_black_list(host)
+  def add_to_black_list(host,time=T_3_WEEKS)
     key = "#{BLACK_LIST_KEY}#{host}"
     redis.set(key, host)
-    redis.expire(key, T_3_WEEKS)
+    redis.expire(key, time)
     host
   end
 
   def setup
     unless redis.exists(RedisProxy::HOSTS_LIST_KEY)
-      redis.del(HOSTS_LIST_KEY)
       HOST_NAMES.each { |host| redis.sadd(HOSTS_LIST_KEY, host) }
     end
     yield

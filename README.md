@@ -33,6 +33,7 @@ HELP:
 /meeting list
 /meeting reset
 /meeting left
+/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>
 ```
 
 ### List
@@ -83,3 +84,16 @@ In case you can reset the blacklist
 `No public message`
 
 **Private Message:** `RESET, white list was cleaned!`
+
+### Add
+
+Time could be :
+* 1 WEEK  => 604800
+* 2 WEEKS => 1209600
+* 3 WEEKS => 1814400
+
+`/meeting add <host name for blacklist> <optional time, default: T_3_WEEKS = 1814400>`
+
+`No public message`
+
+**Private Message:** `**<host name for blacklist>** was put in blacklist, Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve`
