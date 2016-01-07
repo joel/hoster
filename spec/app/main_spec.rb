@@ -77,7 +77,7 @@ describe HostApp, type: :controller do
       it_behaves_like 'should have private message', "Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve"
     end
     context 'dry == true' do
-      include_context 'should have public message', '@backend-devs: **Alexandra** will host the next meeting'
+      include_context 'should have public message', '-dry mode- **Alexandra** will host the next meeting'
       subject { get '/?text=get+dry' }
       it_behaves_like 'success'
       it_behaves_like 'should have private message', "Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve"
