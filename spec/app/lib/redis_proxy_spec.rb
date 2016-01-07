@@ -30,7 +30,7 @@ describe RedisProxy do
 
   describe '#get' do
     shared_context 'fake list of names' do
-      before { expect(instance).to receive(:list) { double(sample: 'Joel') } }
+      before { expect(instance).to receive(:white_list) { double(sample: 'Joel') } }
     end
 
     context 'dry == true' do

@@ -44,7 +44,7 @@ class RedisProxy
   private
 
   def random_host
-    list.sample
+    white_list.sample
   end
 
   HOSTS_LIST_KEY = 'HOST::LIST_KEY'.freeze
