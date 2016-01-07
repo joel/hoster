@@ -56,7 +56,7 @@ class HostApp < Sinatra::Application
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", nil]
       when :get
         dry = options.first
-        msg = "**#{redis_proxy.get(dry)}** will host the next meeting"
+        msg = "@backend-devs: **#{redis_proxy.get(dry)}** will host the next meeting"
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", msg]
       when :add
         name, time = options

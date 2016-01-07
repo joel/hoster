@@ -71,13 +71,13 @@ describe HostApp, type: :controller do
   describe 'action ::get::' do
     before { expect_any_instance_of(RedisProxy).to receive(:random_host) { 'Alexandra' } }
     context 'dry == false' do
-      include_context 'should have public message', '**Alexandra** will host the next meeting'
+      include_context 'should have public message', '@backend-devs: **Alexandra** will host the next meeting'
       subject { get '/?text=get' }
       it_behaves_like 'success'
       it_behaves_like 'should have private message', "Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve"
     end
     context 'dry == true' do
-      include_context 'should have public message', '**Alexandra** will host the next meeting'
+      include_context 'should have public message', '@backend-devs: **Alexandra** will host the next meeting'
       subject { get '/?text=get+dry' }
       it_behaves_like 'success'
       it_behaves_like 'should have private message', "Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve"
