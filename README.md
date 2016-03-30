@@ -43,7 +43,7 @@ HELP:
 
 `No public message`
 
-**Private Message:** `List :: Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+**Private Message:** `List :: Alexandra, Joel, Krzysztof, Lukasz, Steve`
 
 ### Get
 
@@ -52,7 +52,7 @@ You can ask who host the next meeting
 
 **Public Message:** `**Alexandra** will host the next meeting`
 
-**Private Message:** `Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+**Private Message:** `Leftovers => Joel, Krzysztof, Lukasz, Steve`
 
 ### Get dry
 
@@ -64,7 +64,7 @@ You can ask who host the next meeting
 
 **Public Message:** `**Alexandra** will host the next meeting`
 
-**Private Message:** `Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+**Private Message:** `Leftovers => Alexandra, Joel, Krzysztof, Lukasz, Steve`
 
 You can ask who can be chosen for the next meeting, this mean people available on the random choose.
 
@@ -97,7 +97,7 @@ Time could be :
 
 `No public message`
 
-**Private Message:** `**<host name for blacklist>** was put in blacklist, Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve`
+**Private Message:** `**<host name for blacklist>** was put in blacklist, Leftovers => Joel, Krzysztof, Lukasz, Steve`
 
 ### Blacklist
 

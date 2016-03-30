@@ -49,7 +49,7 @@ class RedisProxy
 
   HOSTS_LIST_KEY = 'HOST::LIST_KEY'.freeze
   BLACK_LIST_KEY = 'HOST::BLACK_LIST_KEY::'.freeze
-  HOST_NAMES = %w(Alexandra AntoineQ Joel Krzysztof Lukasz Steve).sort.freeze
+  HOST_NAMES = %w(Alexandra Joel Krzysztof Lukasz Steve).sort.freeze
 
   def black_list
     redis.keys.map { |key| redis.get(key) if key.match(/BLACK_LIST_KEY/) }.compact

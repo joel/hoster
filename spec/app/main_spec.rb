@@ -25,7 +25,7 @@ describe HostApp, type: :controller do
   describe 'action ::list::' do
     subject { get '/?text=list' }
     it_behaves_like 'success'
-    it_behaves_like 'should have private message', 'List :: Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve'
+    it_behaves_like 'should have private message', 'List :: Alexandra, Joel, Krzysztof, Lukasz, Steve'
   end
 
   describe 'action ::help::' do
@@ -37,7 +37,7 @@ describe HostApp, type: :controller do
   describe 'action ::left::' do
     subject { get '/?text=left' }
     it_behaves_like 'success'
-    it_behaves_like 'should have private message', "Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve"
+    it_behaves_like 'should have private message', "Leftovers => Alexandra, Joel, Krzysztof, Lukasz, Steve"
   end
 
   describe 'action ::reset::' do
@@ -50,7 +50,7 @@ describe HostApp, type: :controller do
   describe 'action ::add::' do
     shared_examples 'give the leftovers list' do
       it_behaves_like 'success'
-      it_behaves_like 'should have private message', '**Alexandra** was put in blacklist, Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve'
+      it_behaves_like 'should have private message', '**Alexandra** was put in blacklist, Leftovers => Joel, Krzysztof, Lukasz, Steve'
     end
 
     before { expect_any_instance_of(RedisProxy).to receive(:add).with('Alexandra', time).and_call_original }
@@ -74,13 +74,13 @@ describe HostApp, type: :controller do
       include_context 'should have public message', '@backend-devs: **Alexandra** will host the next meeting'
       subject { get '/?text=get' }
       it_behaves_like 'success'
-      it_behaves_like 'should have private message', "Leftovers => AntoineQ, Joel, Krzysztof, Lukasz, Steve"
+      it_behaves_like 'should have private message', "Leftovers => Joel, Krzysztof, Lukasz, Steve"
     end
     context 'dry == true' do
       include_context 'should have public message', '-dry mode- **Alexandra** will host the next meeting'
       subject { get '/?text=get+dry' }
       it_behaves_like 'success'
-      it_behaves_like 'should have private message', "Leftovers => Alexandra, AntoineQ, Joel, Krzysztof, Lukasz, Steve"
+      it_behaves_like 'should have private message', "Leftovers => Alexandra, Joel, Krzysztof, Lukasz, Steve"
     end
   end
 end

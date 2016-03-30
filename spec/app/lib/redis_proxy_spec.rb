@@ -5,18 +5,18 @@ describe RedisProxy do
 
   describe '#list' do
     it 'should give the entirely list' do
-      expect(instance.list).to eql(['Alexandra', 'AntoineQ', 'Joel', 'Krzysztof', 'Lukasz', 'Steve'])
+      expect(instance.list).to eql(['Alexandra', 'Joel', 'Krzysztof', 'Lukasz', 'Steve'])
     end
   end
 
   describe '#add' do
     it 'blacklist person added' do
-      expect { instance.add('AntoineQ') }.to change {
+      expect { instance.add('Joel') }.to change {
         instance.white_list
       }.from(
-        ['Alexandra', 'AntoineQ', 'Joel', 'Krzysztof', 'Lukasz', 'Steve']
-      ).to(
         ['Alexandra', 'Joel', 'Krzysztof', 'Lukasz', 'Steve']
+      ).to(
+        ['Alexandra', 'Krzysztof', 'Lukasz', 'Steve']
       )
     end
     it 'do nothing if person is not on the list' do
@@ -90,11 +90,11 @@ describe RedisProxy do
   describe '#white_list' do
     context 'without black_list' do
       it 'should give the entirely list' do
-        expect(instance.white_list).to eql(['Alexandra', 'AntoineQ', 'Joel', 'Krzysztof', 'Lukasz', 'Steve'])
+        expect(instance.white_list).to eql(['Alexandra', 'Joel', 'Krzysztof', 'Lukasz', 'Steve'])
       end
     end
     context 'with black_list' do
-      before { expect(instance).to receive(:black_list) { ['Alexandra', 'AntoineQ', 'Joel'] } }
+      before { expect(instance).to receive(:black_list) { ['Alexandra', 'Joel'] } }
       it 'should give list without black listed persons' do
         expect(instance.white_list).to eql(['Krzysztof', 'Lukasz', 'Steve'])
       end
