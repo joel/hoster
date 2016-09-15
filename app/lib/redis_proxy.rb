@@ -6,8 +6,13 @@ class RedisProxy
     setup do
       host = random_host
       add_to_black_list(host) unless dry
+      add_to_current_host(host) unless dry
       host
     end
+  end
+
+  def who?
+    redis.get(CURRENT_HOST) || 'Nobody'
   end
 
   def add(name, time=T_3_WEEKS) # T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400
@@ -49,6 +54,7 @@ class RedisProxy
 
   HOSTS_LIST_KEY = 'HOST::LIST_KEY'.freeze
   BLACK_LIST_KEY = 'HOST::BLACK_LIST_KEY::'.freeze
+  CURRENT_HOST = 'HOST::CURRENT_HOST'.freeze
   HOST_NAMES = %w(Alexandra Joel Krzysztof Lukasz Steve).sort.freeze
 
   def black_list
@@ -65,6 +71,11 @@ class RedisProxy
     redis.set(key(host), host)
     redis.expire(key(host), time)
     host
+  end
+
+  def add_to_current_host(host, time=T_3_WEEKS)
+    redis.set(CURRENT_HOST, host)
+    redis.expire(CURRENT_HOST, time)
   end
 
   def setup

@@ -52,6 +52,8 @@ class HostApp < Sinatra::Application
       when :reset
         redis_proxy.reset
         ['RESET, white list was cleaned!', nil]
+      when :who
+        ["Current Host => #{redis_proxy.who?}", nil]
       when :left
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", nil]
       when :get
@@ -97,6 +99,7 @@ class HostApp < Sinatra::Application
     msg = "HELP:\n"
     msg << "/meeting help\n"
     msg << "/meeting get dry\n"
+    msg << "/meeting who\n"
     msg << "/meeting list\n"
     msg << "/meeting reset\n"
     msg << "/meeting left\n"
@@ -105,5 +108,5 @@ class HostApp < Sinatra::Application
     msg
   end
 
-  ACTIONS = %w(help get list reset left add blacklist).freeze
+  ACTIONS = %w(help get who list reset left add blacklist).freeze
 end

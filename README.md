@@ -30,6 +30,7 @@ you can hit the command with key words like `help get list reset left`
 HELP:
 /meeting help
 /meeting get dry
+/meeting who
 /meeting list
 /meeting reset
 /meeting left
@@ -113,3 +114,15 @@ Alexandra => 20 days, 23 hours, 58 minutes and 13 seconds (time left to remove i
 ```
 
 or `Nobody was blacklisted`
+
+### Who
+
+`/meeting who`
+
+`No public message`
+
+**Private Message:**
+
+```
+Current Host => Joel
+```
