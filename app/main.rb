@@ -58,8 +58,8 @@ class HostApp < Sinatra::Application
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", nil]
       when :get
         dry = options.first
-        msg = dry ? '-dry mode- ' : '@backend-devs: '
-        msg += "**#{redis_proxy.get(dry)}** will host the next meeting"
+        msg = dry ? '-dry mode-' : ENV['SLACK_MENTIONS']
+        msg += " **#{redis_proxy.get(dry)}** will be the chair of the next meeting"
         ["Leftovers => #{redis_proxy.white_list.sort.join(', ')}", msg]
       when :add
         name, time = options
@@ -71,7 +71,7 @@ class HostApp < Sinatra::Application
 
       if public_message
         poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
-        poster.channel = params[:channel_name] ? "#{params[:channel_name]}" : 'backend-team-reloaded'
+        poster.channel = ENV['SLACK_CHANNEL_NAME'] # params[:channel_name] ? "#{params[:channel_name]}" : 'backend-team-reloaded'
         poster.send_message(public_message)
       end
 
