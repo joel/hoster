@@ -71,7 +71,7 @@ class HostApp < Sinatra::Application
 
       if public_message
         poster = Slack::Poster.new(ENV['SLACK_WEBHOOK_URL'])
-        poster.channel = params[:channel_name] ? "##{params[:channel_name]}" : '#team_tech_backend'
+        poster.channel = params[:channel_name] ? "##{params[:channel_name]}" : '#backend-team-reloaded'
         poster.send_message(public_message)
       end
 
