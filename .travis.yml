@@ -2,4 +2,13 @@ language: ruby
 script: bundle exec rspec
 rvm:
   - 2.3.1
-before_install: gem install bundler -v 1.10.6
+before_install: gem install bundler -v 1.12.5
+env:
+  global:
+    - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/Foo/Bar/xxx
+    - SLACK_TOKEN=xxx
+    - REDIS_URL=redis://localhost:6379
+    - SLACK_CHANNEL_NAME=channel-name
+    - HOST_NAMES=John,Jane
+    - SLACK_MENTIONS='@mention'
+    - COMMAND=command-name
