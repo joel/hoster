@@ -97,14 +97,16 @@ class HostApp < Sinatra::Application
 
   def help_message
     msg = "HELP:\n"
-    msg << "/meeting help\n"
-    msg << "/meeting get dry\n"
-    msg << "/meeting who\n"
-    msg << "/meeting list\n"
-    msg << "/meeting reset\n"
-    msg << "/meeting left\n"
-    msg << "/meeting add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400>\n"
-    msg << "/meeting blacklist\n"
+    msg << "/#{ENV['COMMAND']} help -  give this hepd message\n"
+    msg << "/#{ENV['COMMAND']} get - give you the next chair, (dry does no affect anything)\n"
+    msg << "/#{ENV['COMMAND']} get dry - give you the next chair, (dry does no affect anything)\n"
+    msg << "/#{ENV['COMMAND']} who - give you the current chair\n"
+    msg << "/#{ENV['COMMAND']} list - give the enterely list of recorded people\n"
+    msg << "/#{ENV['COMMAND']} reset - removing all blacklisted people\n"
+    msg << "/#{ENV['COMMAND']} left - who could be the chair\n"
+    msg << "/#{ENV['COMMAND']} add - put a person to the blacklist\n"
+    msg << "/#{ENV['COMMAND']} add <T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400> - indicate how long a person should stay on the blacklist\n"
+    msg << "/#{ENV['COMMAND']} blacklist - get blacklisted people with remain time\n"
     msg
   end
 
