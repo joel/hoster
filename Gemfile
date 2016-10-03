@@ -23,4 +23,5 @@ group :test do
   gem 'mock_redis'
   gem 'rack-test'
   gem 'rspec', require: 'spec'
+  gem 'coveralls', require: false
 end

@@ -2,6 +2,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rubygems'
 require 'bundler/setup'
+require 'coveralls'
 
 begin
   require 'pry'
@@ -15,6 +16,8 @@ require 'rack/test'
 require 'mock_redis'
 
 require_relative '../app/main'
+
+Coveralls.wear!
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods, type: :controller
