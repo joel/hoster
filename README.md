@@ -6,7 +6,7 @@
 
 [![Build Status](https://travis-ci.org/joel/hoster.png?branch=master)](https://travis-ci.org/joel/hoster) (Travis CI)
 
-[![Coverage Status](https://coveralls.io/repos/joel/hoster/badge.svg?branch=master)](https://coveralls.io/r/joel/hoster?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/joel/hoster/badge.svg?branch=master)](https://coveralls.io/github/joel/hoster?branch=master)
 
 Simple Sinatra app to respond to a Slack command, basically a Slackbot.
 
