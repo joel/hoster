@@ -8,7 +8,7 @@ env:
     - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/Foo/Bar/xxx
     - SLACK_TOKEN=xxx
     - REDIS_URL=redis://localhost:6379
-    - SLACK_CHANNEL_NAME=channel-name
-    - HOST_NAMES=John,Jane
-    - SLACK_MENTIONS='@mention'
-    - COMMAND=command-name
+    - SLACK_CHANNEL_NAME=backend-team-reloaded
+    - HOST_NAMES=Alexandra,Joel,Krzysztof,Lukasz,Steve
+    - SLACK_MENTIONS='@backend-devs @favreau'
+    - COMMAND=meeting
