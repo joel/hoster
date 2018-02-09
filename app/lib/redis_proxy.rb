@@ -15,7 +15,7 @@ class RedisProxy
     redis.get(CURRENT_HOST) || 'Nobody'
   end
 
-  def add(name, time=T_3_WEEKS) # T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400
+  def add(name, time=T_5_DAYS) # T_1_WEEK = 604800, T_2_WEEKS = 1209600, T_3_WEEKS = 1814400
     _time = time
     _time ||= T_3_WEEKS
 
@@ -67,13 +67,14 @@ class RedisProxy
     @key[name]
   end
 
-  def add_to_black_list(host,time=T_3_WEEKS)
+  def add_to_black_list(host,time=ENV['BLACK_LIST_TIME_SECONDS'].to_i)
+
     redis.set(key(host), host)
     redis.expire(key(host), time)
     host
   end
 
-  def add_to_current_host(host, time=T_3_WEEKS)
+  def add_to_current_host(host, time=ENV['CURRENT_HOST_TIME_SECONDS'].to_i)
     redis.set(CURRENT_HOST, host)
     redis.expire(CURRENT_HOST, time)
   end

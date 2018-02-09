@@ -126,3 +126,20 @@ or `Nobody was blacklisted`
 ```
 Current Host => Joel
 ```
+
+## Config
+
+`heroku config -a peaceful-fjord-3682`
+
+```
+COMMAND:                   meeting
+HOST_NAMES:                Alexandra,Joel,Krzysztof,Lukasz,Steve
+LANG:                      en_US.UTF-8
+RACK_ENV:                  production
+REDIS_URL:                 redis://0.0.0.0:6379
+SLACK_CHANNEL_NAME:        hoster-test
+SLACK_MENTIONS:            @a-slack-mention @John
+SLACK_WEBHOOK_URL:         https://hooks.slack.com/services/XXX/YYYY/zegeXSaPKMX1K8uUj4BobnYe
+BLACK_LIST_TIME_SECONDS:   1814400
+CURRENT_HOST_TIME_SECONDS: 1814400
+```
